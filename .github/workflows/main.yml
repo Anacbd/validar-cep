@@ -25,24 +25,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest pytest-cov jinja2
 
-      # 🔥 IMPORTANTE: gerar XML
       - name: Rodar testes com XML
         run: |
           python -m pytest -v --cov --junitxml=resultado_testes.xml
 
-      # 🔥 gerar HTML (termo de aceite)
       - name: Gerar relatório HTML
         run: |
           python gera_relatorio.py
 
-      # 🔥 salvar artefato (OBRIGATÓRIO pro professor ver)
       - name: Upload do relatório
         uses: actions/upload-artifact@v4
         with:
           name: termo-de-aceite
           path: termo_de_aceite.html
 
-      # 🔥 OPCIONAL (pode falhar sem perder nota)
       - name: Enviar e-mail
         uses: dawidd6/action-send-mail@v3
         continue-on-error: true
